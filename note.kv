@@ -1,0 +1,20 @@
+#:include kv/listscreen.kv
+#:include kv/notesscreen.kv
+#:include kv/notescreen.kv
+
+GridLayout:
+    cols: 1
+    ScreenManager:
+        id: screen_manager
+        ListScreen:
+            id: list_screen
+            name: 'list'
+            manager: 'screen_manager'
+        NotesScreen:
+            id: notes_screen
+            name: 'notes'
+            manager: 'screen_manager'
+        NoteScreen:
+            id: note_screen
+            name: 'note'
+            manager: 'screen_manager'
