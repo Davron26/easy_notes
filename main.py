@@ -28,7 +28,7 @@ class NoteApp(App):
         self.gl.add_widget(Button())
     def setup(self):
         self.list = self.root.ids["list_screen"]
-        self.gl = self.list.ids["fl"]
+        self.gl = self.list.ids["gl"]
     def build(self):
         self.setup()
         return GUI
