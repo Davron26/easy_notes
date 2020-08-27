@@ -1,0 +1,31 @@
+#:import Window kivy.core.window.Window
+
+<CreateList>:
+    FloatLayout:
+        Label:
+            pos_hint: {"x": .1, "y": .6}
+            size_hint: .8, .4
+            text: "Назовите имя нового списка"
+            color: [0, 0, 0, 1]
+        Label:
+            id: name_long
+            pos_hint: {"x": .1, "y": .5}
+            size_hint: .8, .4
+            color: [0, 0, 0, 1]
+        TextInput:
+            id: text_input
+            text: "Напишите имя сюда"
+            pos_hint: {"x": .1, "y": .55}
+            size_hint: .8, .10
+        Button:
+            pos_hint: {"x": .1, "y": .45}
+            size_hint: .8, .075
+            text: "Создать список"
+            on_release:
+                app.create_list()
+        Button:
+            pos_hint: {"x": .1, "y": .35}
+            size_hint: .8, .075
+            text: "Назад"
+            on_release:
+                app.change_screen("list_screen")

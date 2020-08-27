@@ -1,20 +1,21 @@
 #:include kv/listscreen.kv
 #:include kv/notesscreen.kv
 #:include kv/notescreen.kv
+#:include kv/createlist.kv
 
 GridLayout:
     cols: 1
     ScreenManager:
         id: screen_manager
         ListScreen:
+            name: "list_screen"
             id: list_screen
-            name: 'list'
-            manager: 'screen_manager'
         NotesScreen:
+            name: "notes_screen"
             id: notes_screen
-            name: 'notes'
-            manager: 'screen_manager'
         NoteScreen:
+            name: "note_screen"
             id: note_screen
-            name: 'note'
-            manager: 'screen_manager'
+        CreateList:
+            name: "create_list"
+            id: create_list

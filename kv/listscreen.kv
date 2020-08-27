@@ -2,27 +2,26 @@
 
 <ListScreen>:
     ScrollView:
+        size_hint_max_y: Window.height - 100
         do_scroll_x: False
         do_scroll_y: True
         GridLayout:
             id: gl
             size_hint_y: None
             height: self.minimum_height
-            padding: [50, 75, 50, 0]
+            padding: [75, 75, 50, 0]
             spacing: 50
             cols: 1
     FloatLayout:
         Label:
             text: "Списки"
-            pos_hint: {"middle": 1, "y": .4}
+            pos: 0, Window.height / 2.15
             color: [0, 0, 0, 1]
         ImageButton:
             allow_stretch: True
             keep_ratio: False
-            size_hint_max: (Window.height / 10, Window.height / 10)
-            pos_hint: {"x": .8, "y": .85}
+            size_hint_max: (Window.height / 15, Window.height / 15)
+            pos: Window.width - 150, Window.height - 150
             source: "images/plus.png"
             on_release:
-                #app.change_screen("notes")
-                app.create_list()
-
+                app.change_screen("create_list")
