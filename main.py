@@ -5,8 +5,11 @@ from kivy.uix.image import Image
 from kivy.uix.screenmanager import Screen, NoTransition
 from kivy.core.window import Window
 from kivy.storage.jsonstore import JsonStore
-from android.permissions import request_permissions, Permission
-request_permissions([Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE])
+from kivy.utils import platform
+
+if platform == 'android':
+    from android.permissions import request_permissions, Permission
+    request_permissions([Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE])
 
 Window.clearcolor = (1, 1, 1, 1)
 
@@ -24,6 +27,16 @@ class ImageButton(ButtonBehavior, Image):
 GUI = Builder.load_file("note.kv")
 
 class NoteApp(App):
+    def build(self):
+        self.setup()
+        return GUI
+    def setup(self):
+        self.list_screen = GUI.ids["list_screen"]
+        self.create_list_screen = GUI.ids["create_list"]
+        self.gl = self.list_screen.ids["gl"]
+        self.text_input = self.create_list_screen.ids["text_input"]
+        self.name_long = self.create_list_screen.ids["name_long"]
+        self.test()
     def change_screen(self, screen_name):
         tr = NoTransition()
         screen_manager = GUI.ids["screen_manager"]
@@ -33,23 +46,14 @@ class NoteApp(App):
         if len(self.text_input.text) > 37:
             self.name_long.text = "Имя нового списка слишком длинное!!!"
         else:
-            self.gl.add_widget(Button(size_hint_y=None, height=100, text=self.text_input.text,
-                                      on_release=self.test()))
+            self.gl.add_widget(Button(size_hint_y=None, height=100, text=self.text_input.text))
             self.text_input.text = "Напишите имя сюда"
             self.name_long.text = ""
             self.change_screen("list_screen")
     def test(self):
         test = JsonStore('test.json')
         test.put('tito', name='Mathieu', org='kivy')
-    def setup(self):
-        self.list_screen = GUI.ids["list_screen"]
-        self.create_list_screen = GUI.ids["create_list"]
-        self.gl = self.list_screen.ids["gl"]
-        self.text_input = self.create_list_screen.ids["text_input"]
-        self.name_long = self.create_list_screen.ids["name_long"]
-    def build(self):
-        self.setup()
-        return GUI
+
 
 if __name__ == '__main__':
     NoteApp().run()
